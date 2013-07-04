@@ -15,7 +15,7 @@ worse than not having it at all (because you can't trust it).
 Poking around in cmd.exe's `prompt /?`, I found the variable `$M`. This
 "displays the remote name associated with the current drive letter".
 Windbg'ing cmd.exe showed that functionality is implemented by calling
-[http://msdn.microsoft.com/en-us/library/windows/desktop/aa385453(v=vs.85).aspx|WNetGetConnection].
+[WNetGetConnection](http://msdn.microsoft.com/en-us/library/windows/desktop/aa385453.aspx)
 This returned string gets embedded into the prompt which is similar to
 what I want, and since I didn't even know about `$M`, I probably wouldn't
 miss the original functionality...
@@ -77,4 +77,4 @@ Or, a bit more fancy during a conflicted rebase:
 
 meaning rebasing in-progress on step 1 of 3 on the named branch.
 
-Code is at [https://github.com/sgraham/cmdEx/|github].
+Code is at [github](https://github.com/sgraham/cmdEx/).
