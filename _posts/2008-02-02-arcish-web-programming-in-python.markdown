@@ -31,7 +31,7 @@ it nice to read. I prefer &#8220;foo&#8221; being passed as a real parameter
 (vs. (arg _ &#8220;foo&#8221;) in Arc), but the cede()&#8217;s are somewhat
 less pleasant on the Python side.
 
-Moving to a reimplementation of  blog.arc, pyflow fares better.
+Moving to a reimplementation of blog.arc, pyflow fares better.
 
 {% highlight python %}
 Posts = getstorelist("posts")

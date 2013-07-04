@@ -28,7 +28,7 @@ magic of creating a computation machine out of thin air. Everyone can
 understand the description of a relay, and has probably played with
 magnets and electromagnets. When you string a whole lot of these
 switches together and attach them in a specific way, you suddenly get a
-computer? How? *<insert-Zen-moment-here>*
+computer? How? *&lt;insert-Zen-moment-here&gt;*
 
 Somehow in the TTL version (which of course is really very similar,
 except faster) it feels like the computation might be "hiding" in those
