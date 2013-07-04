@@ -1,0 +1,329 @@
+/* -------------------------------------------------------------- 
+(modified) Standardised Internet Explorer 6 stylesheet:
+http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css/
+-------------------------------------------------------------- */
+
+html, 			body, 
+div,			span, 
+object, 		iframe, 
+h1, h2, h3, h4, h5, h6, 
+p, 				blockquote, 
+pre, 			a, 
+abbr, 			acronym, 
+address, 		code, 
+del, 			dfn, 
+em, 			img, 
+q, 				dl, 
+dt, 			dd, 
+ol, 			ul, 
+li, 			fieldset, 
+form, 			label, 
+legend, 		table, 
+caption, 		tbody, 
+tfoot, 			thead, 
+tr, 			th, td { 
+margin : 0; 
+padding : 0; 
+border : 0; 
+font-weight : inherit; 
+font-style : inherit; 
+font-size : 100%; 
+font-family : inherit; 
+vertical-align : baseline; }
+
+/* Body ---------------------------------------------------- */
+
+body {
+width : 50em;
+
+/* http://www.cameronmoll.com/archives/000892.html */
+width : expression(document.body.clientWidth < 640? "640px" : document.body.clientWidth > 120? "120em" : "auto");
+margin : 0 auto;
+padding : 2em 0;
+background :  #fff;
+font : 88% Georgia, Times, serif;
+line-height : 1.4;
+color : #333; }
+
+/* Headings ---------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 { 
+font-weight : normal;
+padding-top: 1.5em;
+text-shadow:0px 2px 2px #d4d4d4; }
+
+h1 { 
+margin-bottom : .5em;
+font-size : 3em; 
+line-height : 1; }
+
+h2 { 
+margin-bottom : .75em;
+font-size : 2em; }
+
+h3 {
+margin-bottom : 1em;
+font-size : 1.5em;
+line-height : 1 ; }
+
+h4 {
+margin-bottom : 1.25em;
+font-size : 1.2em;
+line-height : 1.25; }
+
+h5, h6 { 
+margin-bottom : 1.5em;
+font-weight : bold; 
+font-size : 1em; }
+
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img { 
+margin : 0; }
+
+/* Text elements -------------------------------------------------------------- */
+
+p { 
+margin : 1.5em 0 1.5em; }
+
+a {
+color : #105cb6; 
+text-decoration : underline; }
+
+a:visited { 
+color : #105cb6; }
+
+a:focus, a:hover { 
+color : #003; }
+
+a img {
+border : none; }
+
+blockquote, q {
+quotes : "" ""; }
+
+blockquote { 
+margin : 1.5em 1.5em 1.5em 1.5em;
+padding-left : 1.5em;
+border-left : 1px solid #666;
+font : italic 1.1em "Times New Roman", Times, serif; 
+line-height: 1.5em; }
+
+blockquote:before, blockquote:after, q:before, q:after { 
+content : ""; }
+
+strong { 
+font-weight : bold; }
+
+em, dfn { 
+font-style : italic; }
+
+dfn { 
+font-weight : bold; }
+
+sup, sub { 
+line-height : 0; }
+
+abbr, acronym { 
+border-bottom : 1px dotted #666; }
+
+address {
+margin : 0 0 1.5em;
+font-style : italic; }
+
+del { 
+color : #666; }
+
+pre, code, tt {
+font : 0.9em 'andale mono', 'consolas', 'lucida console', monospace;
+line-height : 1.5; }
+
+pre { 
+white-space : pre;
+padding: 10px; }
+
+/* Lists -------------------------------------------------------------- */
+
+li ul, li ol { 
+list-style-type : circle;
+margin : 0 1.5em .75em 1.5em; }
+
+ul, ol {
+margin : 0 1.5em 1.5em 0; }
+
+ul { 
+list-style-type : disc; }
+
+ol {
+list-style-type : decimal; }
+
+dl {
+margin-bottom: 1.5em; 
+padding-top: 1.5em; 
+border-top : 1px solid #ccc; }
+
+dl dt {
+margin-bottom : .75em;
+font-size : 1.2em;
+line-height : 1.25; }
+
+dd {
+margin-bottom: 1.5em; 
+padding-bottom: 1.5em; 
+border-bottom : 1px solid #ccc; }
+
+/* Tables -------------------------------------------------------------- */
+
+table {
+border-collapse : separate; 
+border-spacing : 0;
+margin-bottom : 1.4em;
+width : 100%; }
+
+table, td, th { 
+vertical-align : top; }
+
+th, thead th {
+font-weight : bold; }
+
+th, td, caption {
+padding : 4px 10px 4px 5px; 
+text-align : left; 
+font-weight : normal; }
+
+th, td {
+border-bottom : 1px solid #ccc; }
+
+tfoot { 
+font-size : .9em; }
+
+caption {
+margin-bottom : 1em;
+font-size : 1.5em;
+line-height : 1 ; }
+
+/* Forms -------------------------------------------------------------- */
+
+label { 
+font-weight : bold; }
+
+fieldset { 
+margin : 0 0 1.5em 0; 
+padding : 1.4em 1.4em 0 1.4em; 
+border : 1px solid #ccc; }
+
+legend {  
+font-size : 1.2em; 
+font-weight : bold; }
+
+textarea { 
+width : 390px; 
+height : 250px; 
+padding : 5px; }
+
+
+body { line-height: 2em; font-size: 12pt; }
+h2, h3, h5 { font-weight: bold; }    
+ul { margin-left: 0em; }
+li { margin-left: 1.5em; }
+
+#tabs li {
+display: inline; }
+
+#tabs h1 a {
+text-decoration: none; }
+
+#tabs ul, #tabs ol {
+margin : 0; }
+
+#tabs {
+text-align: right;
+margin-bottom: 1.5em; }
+
+#footer {
+clear: both;
+text-align: center;
+padding-top: 150px;
+font-size: small;
+color: #888;
+padding-bottom: 50px; }
+
+.article_date {
+font-style: italic; 
+color: #666;
+text-align: right; }
+
+.article_date_title {
+line-height: .5em;
+visibility: hidden;
+font-size: .8em;
+font-style: italic; 
+color: #666; }
+
+.projectscol h3 {
+text-decoration: underline;
+font-size: 1.1em;
+color : #105cb6; 
+padding: .5em;
+width: 11em;
+border: 1px dotted #888;
+margin: .25em 0 0 0;
+cursor: pointer;
+text-shadow: none; }
+
+.projectscol p {
+margin: 0 1em 1em 1em; }
+
+.rightcol {
+float: right;
+border-left: dotted black 1px;
+margin: 0;
+padding: 1em;
+width: 18em;
+text-align: right; }
+
+.rightcol ul {
+font-size: .85em;
+list-style-type : none; }
+
+.rightcol li, .rightcol ul {
+margin: 0; }
+
+.intro h1 a {
+text-decoration: none; }
+
+.highlight { 
+margin : 1.5em 1.5em 1.5em -1.5em;
+padding-left : 1.5em;
+border-left : 1px dotted #666; }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #008000 } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #0000ff } /* Keyword */
+.highlight .cm { color: #008000 } /* Comment.Multiline */
+.highlight .cp { color: #0000ff } /* Comment.Preproc */
+.highlight .c1 { color: #008000 } /* Comment.Single */
+.highlight .cs { color: #008000 } /* Comment.Special */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gh { font-weight: bold } /* Generic.Heading */
+.highlight .gp { font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { font-weight: bold } /* Generic.Subheading */
+.highlight .kc { color: #0000ff } /* Keyword.Constant */
+.highlight .kd { color: #0000ff } /* Keyword.Declaration */
+.highlight .kn { color: #0000ff } /* Keyword.Namespace */
+.highlight .kp { color: #0000ff } /* Keyword.Pseudo */
+.highlight .kr { color: #0000ff } /* Keyword.Reserved */
+.highlight .kt { color: #2b91af } /* Keyword.Type */
+.highlight .s { color: #a31515 } /* Literal.String */
+.highlight .nc { color: #2b91af } /* Name.Class */
+.highlight .ow { color: #0000ff } /* Operator.Word */
+.highlight .sb { color: #a31515 } /* Literal.String.Backtick */
+.highlight .sc { color: #a31515 } /* Literal.String.Char */
+.highlight .sd { color: #a31515 } /* Literal.String.Doc */
+.highlight .s2 { color: #a31515 } /* Literal.String.Double */
+.highlight .se { color: #a31515 } /* Literal.String.Escape */
+.highlight .sh { color: #a31515 } /* Literal.String.Heredoc */
+.highlight .si { color: #a31515 } /* Literal.String.Interpol */
+.highlight .sx { color: #a31515 } /* Literal.String.Other */
+.highlight .sr { color: #a31515 } /* Literal.String.Regex */
+.highlight .s1 { color: #a31515 } /* Literal.String.Single */
+.highlight .ss { color: #a31515 } /* Literal.String.Symbol */

@@ -1,0 +1,59 @@
+---
+layout: post
+title: Euler 3
+---
+
+The problem statement:
+
+> The prime factors of 13195 are 5, 7, 13 and 29.
+> What is the largest prime factor of the number 600851475143?
+
+The first thing we need to do likely is know if a number is prime:
+
+{% highlight ocaml %}
+let isprime x =
+    x > 1 &&
+    not(Seq.exists (fun n -> x % n = 0) {2..int(sqrt (float x))})
+{% endhighlight %}
+
+This is a little sneaky. First, it generates a list of numbers from 2 to the
+square root of the number to be tested (square root because the largest
+possible factor). Then, it uses an existence test to see if any of those
+numbers can divide into the candidate number. If they can, we know it&#8217;s
+not prime.
+
+With that out of the way, we can attack the actual problem. My first attempt
+was very C-like, to whit:
+
+{% highlight ocaml %}
+let prob3 num = 
+    for i = int(sqrt(float num)) to 2 do
+        if num % int64 i = 0L && isprime(i) then return i
+prob3 600851475143L
+{% endhighlight %}
+
+But, that doesn&#8217;t work. &#8216;return&#8217; doesn&#8217;t exist, and
+the type of &#8216;for&#8217; is unit, so there&#8217;s no way to get the
+result out. I was trying to avoid computing too many results, so going
+backwards was the goal (rather than making a list of answers and filtering
+them, as in the previous problems).
+
+I didn&#8217;t exactly figure out how to do that, but I did come up with a
+reasonable solution (at least to my non-F# eyes):
+
+{% highlight ocaml %}
+let num = 600851475143L
+{ for i in [2..int(sqrt(float num))] do
+    if num % int64 i = 0L && isprime(i) then yield i }
+|> Seq.fold(fun a x -> max a x) 0
+{% endhighlight %}
+
+First, we make a list of all the factors of the target number that are also
+prime (the comprehension). Then, fold the maximum value out of those.
+It&#8217;s definitely doing a lot more work than necessary, but it works OK.
+
+There&#8217;s also a little bit of mucking around in this problem because the
+number was bigger than 2^32-1. F# handles it reasonably cleanly though, at
+least up to int64 range, by just adding some float/int/int64 calls to convert
+things to the right types explicitly. Not sure what bignum looks like yet
+though.

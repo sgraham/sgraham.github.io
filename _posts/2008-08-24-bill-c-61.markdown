@@ -1,0 +1,70 @@
+---
+layout: post
+title: Bill C-61
+---
+
+Canada&#8217;s Bill C-61 is an even-worse version of the United States&#8217;
+DMCA.
+
+For more information, <a
+href="http://www.michaelgeist.ca/">http://www.michaelgeist.ca/</a> is a
+reasonable starting point. I rolled up my sleeves and had a go at <a
+href="http://www2.parl.gc.ca/HousePublications/Publication.aspx?Docid=3570473&amp;file=4">http://www2.parl.gc.ca/HousePublications/Publication.aspx?Docid=3570473&amp;file=4</a>
+which is relatively readable.
+
+Here&#8217;s the letter I just posted (yes, on actual paper, in an envelope!)
+to my MP.
+
+If you&#8217;re Canadian, please read the above links and if you don&#8217;t
+agree with this Bill, as I&#8217;m confident you won&#8217;t, phone or write
+to your MP (especially if your MP is a Conservative Party member!)
+
+---
+
+    Office of the Honourable Dr. Hedy Fry, P.C., M.P.
+    Confederation Building House of Commons
+    Ottawa, Ontario
+    K1A 0A6
+
+    Hello Dr. Fry
+
+    I am a resident of Vancouver Centre, and I'm writing to you to express my
+    absolute horror at the current state of Bill C-61.
+
+    I am employed as a software engineer in the entertainment industry, and as
+    such, fully respect and understand the need for copyright reform in
+    Canada.
+
+    However, from reading this bill (at
+    http://www2.parl.gc.ca/HousePublications/Publication.aspx?Docid=3570473,
+    the reproduction rights afforded to Canadians are absolutely useless
+    because of section 29.21(c). This section subordinates any time-shifting
+    and media-shifting rights that should be allowed, merely by having any
+    kind of digital lock mechanism on the content. But, virtually all media
+    sold in Canada now contains a digital lock of some sort, so it's almost
+    pointless to "grant" these rights.
+
+    Inevitably, the devices or internet services which control the digital
+    lock access fail, go out of business, or otherwise are not maintained. If
+    we are unable to legally shift to other formats, and the media become
+    un-unlockable, they are effectively gone. Will all of the companies and
+    individuals controlling the locks exist in 5 years? Maybe. 50 years?
+    Unlikely.
+
+    I would also like to especially point out that this does not solely
+    concern things that could perhaps be considered "frivolous" like
+    pop-consumer-ish music and video. Over the next 10-15 years, it is all but
+    guaranteed that most books, and crucially text books, will be delivered
+    and consumed in electronic form. My wife is a high school teacher employed
+    by the Vancouver School Board, and I would be horrified to find that our
+    already underfunded education system had lost access to teaching
+    resources, simply because the company controlling a digital lock had
+    failed.
+
+    I sincerely hope you will make sure that this Bill is heavily modified, or
+    defeated, when the time comes.
+
+    Thank you for your time,
+
+    Scott Graham
+    *my address removed*

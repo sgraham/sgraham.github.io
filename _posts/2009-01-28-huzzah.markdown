@@ -1,0 +1,6 @@
+---
+layout: post
+title: Huzzah!
+---
+
+![Empty Inbox](/images/empty_inbox.png)

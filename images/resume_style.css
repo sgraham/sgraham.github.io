@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  color: 333333;
+  line-height: 1.4em;
+  background-color: #f8f8f8;
+  font-family: Georgia;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#scott-graham {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+#scott-graham h1 { border: 0 !important; }
+#scott-graham h2 { border: 0 !important; }
+#scott-graham h3 { border: 0 !important; }
+#scott-graham h4 { border: 0 !important; }
+#scott-graham h5 { border: 0 !important; }
+#scott-graham h6 { border: 0 !important; }
+#scott-graham h1 {
+  font-size: 200% !important;
+  border-top: 4px solid #aaaaaa !important;
+  padding-top: 0.5em !important;
+  margin-top: 1.5em !important;
+}
+#scott-graham h1:first-child {
+  margin-top: 30px !important;
+  padding-top: 0.25em !important;
+  border-top: none !important;
+}
+#scott-graham h2 {
+  font-size: 150% !important;
+  margin-top: 1.5em !important;
+  border-top: 4px solid #d0d0d0 !important;
+  padding-top: 0.5em !important;
+}
+#scott-graham h3 { margin-top: 1em !important; }
+#scott-graham p {
+  margin: 1em 0 !important;
+  line-height: 1.5em !important;
+}
+#scott-graham ul { margin: 1em 0 1em 2em !important; }
+#scott-graham ul li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+#scott-graham ul ul {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+#scott-graham ul ol {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+#scott-graham ol { margin: 1em 0 1em 2em !important; }
+#scott-graham ol li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+#scott-graham ol ul {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+#scott-graham ol ol {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+#scott-graham blockquote {
+  border-left: 5px solid #dddddd;
+  margin: 1em 0;
+  padding-left: 0.6em;
+}
+#scott-graham a {
+  color: #4183c4;
+  text-decoration: none;
+}
+#scott-graham a:visited {
+  color: #4183c4;
+  text-decoration: none;
+}
+#scott-graham a:hover { text-decoration: underline; }
+#scott-graham pre {
+  margin: 1em 0 !important;
+  font-size: 12px !important;
+  background-color: #f8f8ff !important;
+  border: 1px solid #dedede !important;
+  padding: 0.5em !important;
+  line-height: 1.5em !important;
+  color: #444444 !important;
+  overflow: auto !important;
+}
+#scott-graham pre code {
+  padding: 0 !important;
+  font-size: 12px !important;
+  background-color: #f8f8ff !important;
+  border: none !important;
+}
+#scott-graham code {
+  font-size: 12px !important;
+  background-color: #f8f8ff !important;
+  color: #444444 !important;
+  padding: 0 0.2em !important;
+  border: 1px solid #dedede !important;
+}
+#scott-graham img { max-width: 100%; }
+#scott-graham blockquote {
+  margin: 1em 0 !important;
+  border-left: 5px solid #dddddd !important;
+  padding-left: 0.6em !important;
+  color: #555555 !important;
+}
+#scott-graham dt {
+  font-weight: bold !important;
+  margin-left: 1em !important;
+}
+#scott-graham dd {
+  margin-left: 2em !important;
+  margin-bottom: 1em !important;
+}

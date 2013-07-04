@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>h4ck3r.net</title>
+        <link href="/css/site.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div id="canvas">
+            <div class="intro">
+                <h1>Scott Graham</h1>
+
+                <p>Welcome to <b>h4ck3r.net</b>, my personal website. You can
+                find some information about me and my projects, and you can
+                read some of my articles about programming and tech. </p>
+
+                <p> You can also subscribe to my blog's <a
+                    href="/atom.xml">RSS feed</a> or <a
+                    href="http://twitter.com/sgraham_guid">follow me</a>
+                on twitter. </p>
+
+                <p>Are you <em>"Done, and Gets Things Smart"</em>-smart?
+                <a href="mailto:scott.webcontact@h4ck3r.net">Get in
+                    touch</a> if you want to come <a
+                    href="http://jobs.google.com/">work with me</a>,
+                <em>or</em> here's my <b>r&eacute;sum&eacute;</b> (
+                <a href="/images/scott_graham_resume.html">html</a>
+                |
+                <a href="/images/scott_graham_resume.pdf">pdf</a>
+                )
+                if you've got an exciting project to work on that would
+                suit my skills.</p>
+
+            </div>
+
+            <div>
+                <h2>Blog</h2>
+                <h4>Recently</h4>
+                <ul class="posts">
+                    {% for post in site.posts limit: 3 %}
+                    <li>
+                        <a  onmouseover="showDate('{{ post.id | replace:'/','-' }}', true);"
+                            onmouseout="showDate('{{ post.id | replace:'/','-' }}', false);"
+                            href="{{ post.url }}">{{ post.title }}</a>
+                        <div id="{{ post.id | replace:'/','-' }}"
+                            class="article_date_title">{{ post.date | date_to_string }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p><a href="/blog/">See all...</a></p>
+            </div>
+            <div>
+                    <h2>Projects</h2>
+
+                    <p> Most of my projects, time, and code go into
+                    secret-work-type-things, but when I have time, these
+                    are some of the projects I've worked on for fun (in
+                    roughly reverse chronological order). Some projects
+                    and some small hacks.</p>
+
+                    <div id="projects" class="projectscol">
+                        <div id='projbody' style="float:right;width:36em;"></div>
+                        {{ content }}
+                    </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>
+                Copyright &copy; Scott Graham.<br/>
+            </p>
+        </div>
+<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js" type="text/javascript"></script> 
+<script type="text/javascript">
+window.addEvent('domready', function() {
+    var container = $('projbody');
+
+    var bodies = {};
+    $each($('projects').getElements('h3'), function(projheader, index) {
+        var el = new Element('div');
+        var projbodyels = [];
+        for (var cur = projheader.getNext(); cur !== null; cur = cur.getNext())
+        {
+            if (cur.get('tag') == 'h3') break;
+            projbodyels.push(cur);
+        }
+        el.inject(projheader, 'after');
+        el.adopt(projbodyels);
+        el.setStyle('display', 'none');
+        container.adopt(el);
+
+        bodies[nameFor(projheader)] = el;
+
+        projheader.addEvent('click', function() { display(projheader); });
+    });
+
+    function nameFor(hdr)
+    {
+        return hdr.get('text').replace(' ', '-'); 
+    }
+
+    function display(hdr)
+    {
+        window.location.hash = nameFor(hdr);
+
+        for (var i in bodies) bodies[i].setStyle('display', 'none');
+        $each($('projects').getElements('h3'), function(i) { i.setStyle('background', '#ffffff'); });
+
+        bodies[nameFor(hdr)].setStyle('display', 'block');
+        hdr.setStyle('background', '#dddddd');
+    }
+
+    // update from anchor
+    $each($('projects').getElements('h3'), function(hdr) {
+        if (window.location.hash == '#' + nameFor(hdr))
+        {
+            display(hdr);
+        }
+    });
+});
+function showDate(id, vis) { document.getElementById(id).style.visibility = vis ? "visible" : "hidden"; }
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10993568-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    </body>
+</html>

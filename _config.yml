@@ -1,0 +1,5 @@
+auto: false
+destination: _site/static
+server: false
+pygments: true
+permalink: pretty
