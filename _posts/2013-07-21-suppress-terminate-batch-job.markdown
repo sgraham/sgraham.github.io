@@ -3,7 +3,7 @@ layout: post
 title: Suppress 'Terminate batch job (Y/N)?' in cmd.exe
 ---
 
-In my [ongoing](http://h4ck3r.net/2013/07/04/git-branch-in-cmd/) rewrite
+In my [ongoing](/2013/07/04/git-branch-in-cmd/) rewrite
 of cmd.exe from the outside, my next target was the extraordinarily
 aggravating prompt that cmd presents when you Ctrl-C when running a
 batch file.
