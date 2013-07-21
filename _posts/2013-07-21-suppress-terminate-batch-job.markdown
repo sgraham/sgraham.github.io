@@ -3,10 +3,10 @@ layout: post
 title: Suppress 'Terminate batch job (Y/N)?' in cmd.exe
 ---
 
-In my [ongoing](/2013/07/04/git-branch-in-cmd/) rewrite
-of cmd.exe from the outside, my next target was the extraordinarily
-aggravating prompt that cmd presents when you Ctrl-C when running a
-batch file.
+In my [ongoing rewrite of cmd.exe from the
+outside](/2013/07/04/git-branch-in-cmd/), my next target was the
+extraordinarily aggravating prompt that cmd presents when you Ctrl-C
+when running a batch file.
 
     c:\>type x.bat
     pause
@@ -17,17 +17,19 @@ batch file.
     Press any key to continue . . .           <- Press Ctrl-C here
     Terminate batch job (Y/N)?
 
-Uh, yeah. I pressed Ctrl-C, I'm pretty sure I want to, you know,
-*interrupt* things. It also isn't always enough to Ctrl-C again to get
-out, so you actually have to press Y, Enter.
+Yup. I pressed Ctrl-C, I'm pretty sure I want to, you know, *interrupt*
+things. It also isn't always enough to Ctrl-C again to get out, so you
+actually have to press Y, Enter. And, you're in an indeterminate state
+regardless of whether you respond Y or N, making it completely
+pointless.
 
 It's mainly annoying for a bunch of tools that wrap their main .exe in a
 batch file. On Linux/Mac, there's no particular penalty to doing so, so
 it's sometimes easier to have the real binary in a different folder and
-have a forwarding script in the PATH that runs the binary.
+have a forwarding script in the `PATH` that runs the binary.
 
 So, I've probably hated that prompt for going on 20 years now. No
-longer! Sunday July 21st, 2013 I took a stand. NO MORE DUMB PROMPT.
+longer! Sunday July 21st, 2013 I took a stand. **NO MORE DUMB PROMPT**.
 
 This one was implemented slightly differently than the previous git
 branch functionality. The main difference is that the internal cmd
