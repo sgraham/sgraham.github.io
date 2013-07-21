@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Suppress 'Terminate batch job (Y/N)?' in cmd.exe
+title: Suppress Terminate batch job (Y/N)? in cmd.exe
 ---
 
 In my [ongoing](/2013/07/04/git-branch-in-cmd/) rewrite
