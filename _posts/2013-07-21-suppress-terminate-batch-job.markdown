@@ -35,7 +35,7 @@ This one was implemented slightly differently than the previous git
 branch functionality. The main difference is that the internal cmd
 function `PromptUser` is used in a variety of places (for example, to
 confirm deletion or overwrite of files), and, there's no obvious call to
-an imported kernel32 function nearby that can be used to modify how it
+an imported `kernel32` function nearby that can be used to modify how it
 works.
 
 So, instead, I decided the best tactic was to find the appropriate call
@@ -44,8 +44,8 @@ what looks like the message id (to be looked up for localization) and
 then does the appropriate batch terminating if `PromptUser` returns `1`.
 
 The tricky part is that those functions are purely internal
-implementation functions and aren't imported or exported. But {helpfully
-| awesomely | regrettably}, Microsoft publishes PDBs for many Windows
+implementation functions and aren't imported or exported. But {awesomely
+| helpfully | regrettably}, Microsoft publishes PDBs for many Windows
 system binaries, and an [API for downloading and
 interpreting](http://msdn.microsoft.com/en-us/library/windows/desktop/ms679294.aspx)
 those symbols.
