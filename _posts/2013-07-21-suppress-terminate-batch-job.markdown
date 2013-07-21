@@ -42,17 +42,17 @@ what looks like the message id (to be looked up for localization) and
 then does the appropriate batch terminating if `PromptUser` returns `1`.
 
 The tricky part is that those functions are purely internal
-implementation functions and aren't imported or exported. But (helpfully
-| awesomely | regrettably), Microsoft publishes PDBs for many Windows
+implementation functions and aren't imported or exported. But {helpfully
+| awesomely | regrettably}, Microsoft publishes PDBs for many Windows
 system binaries, and an [API for downloading and
 interpreting](http://msdn.microsoft.com/en-us/library/windows/desktop/ms679294.aspx)
 those symbols.
 
 With that in hand, it's a relatively straightforward matter of using
 DbgHelp to find the location of `CtrlCAbort` in cmd (we're already
-injected into the process), and then finding the callsite that matches
+injected into the process), and then finding the call site that matches
 the call to `PromptUser`, and patching it to emulate `PromptUser` having
-returned `1`. The callsite is quite distinctive because of the pushing
+returned `1`. The call site is quite distinctive because of the pushing
 of the message id, so given the start address of the function there's
 little likelihood of a false positive.
 
