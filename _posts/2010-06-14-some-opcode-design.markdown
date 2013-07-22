@@ -42,7 +42,7 @@ Embedded description of opcodes and encoding (or
 [external](http://spreadsheets.google.com/pub?key=0AreKWASMXkZTdGFrSFRBSDNPNUNwRXc4WWlsRjlGVVE&single=true&gid=0&output=html)
 if that sucks).
 
-<iframe width='700' height='400' frameborder='0' src='http://spreadsheets.google.com/pub?key=0AreKWASMXkZTdGFrSFRBSDNPNUNwRXc4WWlsRjlGVVE&single=true&gid=0&output=html&widget=true'></iframe>
+<iframe width='700' height='400' frameborder='0' src='http://spreadsheets.google.com/pub?key=0AreKWASMXkZTdGFrSFRBSDNPNUNwRXc4WWlsRjlGVVE&amp;single=true&amp;gid=0&amp;output=html&amp;widget=true'></iframe>
 
 It's pretty PDP-11-y, but simpler, and the modified to my liking. `cons`
 is a basic instruction, and `car`, `cdr`, `rplaca`, `rplacd` have one
