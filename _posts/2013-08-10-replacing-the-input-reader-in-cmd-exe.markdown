@@ -49,10 +49,10 @@ And I get to add some bonus keybindings:
 
 And most importantly, tab completion is improved. This is still nascent, but is
 already much improved over cmd's native completion. There's command-in-path
-completion, so if you're at the beginning of a line, the `PATH` (and built-in
-cmd functions) will be offered for completion, rather than random files in the
-current directory. There's some built in support for git completion too, so for
-example:
+completion, so if you're at the beginning of a line, executable files in `PATH`
+(and built-in cmd functions) will be offered for completion, rather than random
+files in the current directory. There's some built in support for git
+completion too, so for example:
 
     C:\>git ch<TAB>
 
