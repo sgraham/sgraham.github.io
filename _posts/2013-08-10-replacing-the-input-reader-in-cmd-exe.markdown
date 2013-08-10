@@ -17,14 +17,16 @@ thought it might be possible to just hook in and replace that. Unfortunately it
 got a bit messy because of the internal state maintained by cmd for the
 contents of the line, where it is in the line, and so on.
 
-So instead, I decided to full-on replace the implementation of `ReadConsole` in
-cmd. The drawback of this approach is that I have to implement all input
+So instead, I decided to full-on replace the implementation of `ReadConsoleW`
+in cmd. The drawback of this approach is that I have to implement all input
 handling. This of course is also the benefit, as I can control and do whatever
 I want inside there now.
 
-`ReadConsole` gets patched in the same way as the previous ones (IAT patching),
-and then it's "just" a matter of writing readline-ish code to implement all the
-various line editing functionality.
+`ReadConsoleW` gets patched in the same way as the previous ones (IAT
+patching), and then it's "just" a matter of writing readline-ish code to
+implement all the various line editing functionality. Inside the replacement
+function I use `ReadConsoleInput` which reads the physical press/release of
+each keyboard key, and build up editing from there.
 
 First, there's all the basics of typing, Home, End, Ctrl-Left/Right to jump by
 words. And, command history with Up/Down. Tab does basic file completion, etc.
@@ -33,7 +35,7 @@ But then, I added a bunch more convenient functionality like saving command
 history across sessions. This required replacing `msvcrt!exit` which is when
 this history is saved.
 
-And I got to add some bonus keybindings:
+And I get to add some bonus keybindings:
 
 - Alt-Up is the same as "cd .."
 - Alt-Left/Right (or the browser navigation keys) move through previously
@@ -47,8 +49,8 @@ And I got to add some bonus keybindings:
 
 And most importantly, tab completion is improved. This is still nascent, but is
 already much improved over cmd's native completion. There's command-in-path
-completion, so if you're at the beginning of a line, the PATH (and built-in cmd
-functions) will be offered for completion, rather than random files in the
+completion, so if you're at the beginning of a line, the `PATH` (and built-in
+cmd functions) will be offered for completion, rather than random files in the
 current directory. There's some built in support for git completion too, so for
 example:
 
