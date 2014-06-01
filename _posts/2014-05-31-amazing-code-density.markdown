@@ -11,7 +11,7 @@ pretty amazing 8 bytes!
 
 I was curious how it worked, so I took a look at an updated version
 that's been further optimized to be only 7 bytes long, and even fixes
-the screen not getting cleared.
+the screen not getting fully cleared.
 
 It is of course a DOS .com file because there's no way to approach that
 size otherwise. Ostensibly, this is the whole code, though as we'll see
@@ -54,25 +54,25 @@ that character.
 
 Now comes some magic: the JMP jumps to loop+1. That is, into the middle
 of the LES instruction. This is then decoded as "1c 9f", which is "SBB
-AL, 0x9f". This is subtracts 0x9f from AL, which effectively randomizes
-AL, so we get the cycling letter pattern as we cycle through the loop,
-while maintaining the 0x02 in the top half of AX for the colour.
+AL, 0x9f". This subtracts 0x9f from AL, which effectively randomizes AL,
+so we get the cycling letter pattern as we cycle through the loop, while
+maintaining the 0x02 in the top half of AX for the colour.
 
 After the SBB, we STOSW, XCHG and JMP again. This time we write a black
 byte, next time we write green, and repeat. We're still writing into
 random memory at this point, but eventually we get to 0xb8000, fill the
-screen, and then DI loops back to 0 and we start again.
+screen, and then DI overflows back to 0 and we start again.
 
 So, a summary of the bytes:
 
 "C4 1C" is used in two different ways for code (LES, SBB), and as data
 as well (though this loaded data value is unimportant).
 
-"9F" is the most amazingly reused byte: At first it's the very important
-LAHF which loads the colour into AH. Later, it's the operand to the SBB
-instruction, and is prime, so cycles effectively through the character
-set to randomize the output. Finally, it's loaded into the ES register
-as data along with 0xab to point more or less at video memory.
+"9F" is the most amazingly reused byte: At first, it's the very
+important LAHF which loads the colour into AH. Later, it's the operand
+to the SBB instruction, and is prime, so cycles effectively through the
+character set to randomize the output. Finally, it's loaded into the ES
+register as data along with 0xab to point more or less at video memory.
 
 "AB" is used in two ways, as the STOSW that does the main work of
 filling video memory, but also as data for the top part of the ES
