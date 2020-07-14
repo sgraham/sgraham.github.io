@@ -1,9 +1,12 @@
 (function(){
-  var video = document.createElement('video', {loop: '', muted: ''});
+  var video = document.createElement('video');
+  video.loop = true;
+  video.muted = true;
   console.log(video);
   function add(type, data) {
-    var as_uri = 'data:video/' + type + ';base64,' + data;
-    var source = document.createElement('source', {src: as_uri, type: 'video/'+type});
+    var source = document.createElement('source');
+    source.src = 'data:video/' + type + ';base64,' + data;
+    source.type = 'video/' + type
     video.appendChild(source);
   }
   add('webm', 'GkXfo0AgQoaBAUL3gQFC8oEEQvOBCEKCQAR3ZWJtQoeBAkKFgQIYU4BnQI0VSalmQCgq17FAAw9CQE2AQAZ3aGFtbXlXQUAGd2hhbW15RIlACECPQAAAAAAAFlSua0AxrkAu14EBY8WBAZyBACK1nEADdW5khkAFVl9WUDglhohAA1ZQOIOBAeBABrCBCLqBCB9DtnVAIueBAKNAHIEAAIAwAQCdASoIAAgAAUAmJaQAA3AA/vz0AAA=');
