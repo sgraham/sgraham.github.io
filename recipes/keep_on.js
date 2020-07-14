@@ -1,5 +1,6 @@
 (function(){
   var video = document.createElement('video', {loop: '', muted: ''});
+  console.log(video);
   function add(type, data) {
     var as_uri = 'data:video/' + type + ';base64,' + data;
     var source = document.createElement('source', {src: as_uri, type: 'video/'+type});
