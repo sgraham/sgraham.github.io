@@ -5,6 +5,7 @@ Util.base64 = function(mimeType, base64) {
 
 var video = document.createElement('video');
   video.setAttribute('loop', '');
+  video.setAttribute('muted', '');
 
   function addSourceToVideo(element, type, dataURI) {
     var source = document.createElement('source');
