@@ -1,6 +1,6 @@
 (function(){
-var fullScreenButton = document.createElement("button");//'#fullScreenButton');
-
+var fullScreenButton = document.createElement("button");
+fullScreenButton.innerText = 'Enter Full Screen';
 document.body.insertBefore(fullScreenButton, document.body.childNodes[0]);
 
 fullScreenButton.addEventListener('click', () => {
@@ -39,8 +39,6 @@ if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
   
   document.addEventListener('visibilitychange', handleVisibilityChange);
   document.addEventListener('fullscreenchange', handleVisibilityChange);
-
-  document.documentElement.requestFullscreen();
 } else {  
   console.error('Wake Lock API not supported.');
 }
