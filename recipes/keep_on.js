@@ -26,6 +26,6 @@ if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
   document.addEventListener('visibilitychange', handleVisibilityChange);
   document.addEventListener('fullscreenchange', handleVisibilityChange);
 } else {
-  console.error('Wake Lock API not supported.');
+  alert('Wake Lock API not supported.');
 }
 })();
