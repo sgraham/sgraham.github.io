@@ -25,6 +25,7 @@
                         <div id="{{ post.id | replace:'/','-' }}"
                             class="article_date_title">{{ post.date | date_to_string }}</div>
                     </li>
+                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>
