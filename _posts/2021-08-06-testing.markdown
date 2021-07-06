@@ -1,0 +1,7 @@
+---
+layout: newpost
+title: Testing
+draft: true
+---
+
+This is a test of a future draft post.

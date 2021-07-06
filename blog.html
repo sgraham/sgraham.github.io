@@ -1,0 +1,46 @@
+---
+---
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>h4ck3r.net</title>
+        <link href="/css/site.css" media="screen" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div id="canvas">
+            <div class="intro">
+                <h1><a href="/">Scott Graham</a></h1>
+                <h2>All entries</h2>
+                <ul class="posts">
+                    {% for post in site.posts %}
+                    {% assign cutoff = '2021-01-01' | date: '%s' %}
+                    {% capture posttime %}{{post.date | date: '%s'}}{% endcapture %}
+                    {% if posttime <= cutoff %}
+                    <li>
+                        <a  onmouseover="showDate('{{ post.id | replace:'/','-' }}', true);"
+                            onmouseout="showDate('{{ post.id | replace:'/','-' }}', false);"
+                            href="{{ post.url }}">{{ post.title }}</a>
+                        <div id="{{ post.id | replace:'/','-' }}"
+                            class="article_date_title">{{ post.date | date_to_string }}</div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        <div id="footer">
+            <p>
+                Copyright &copy; Scott Graham.<br/>
+            </p>
+        </div>
+<script type="text/javascript">
+function showDate(id, vis) { document.getElementById(id).style.visibility = vis ? "visible" : "hidden"; }
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10993568-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    </body>
+</html>
