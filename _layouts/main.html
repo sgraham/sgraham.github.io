@@ -4,7 +4,9 @@
 <p>
 <ul>
 {% for post in site.posts %}
-<li><a href="{{post.url}}">{{post.title}}</a> &mdash; {{post.date}} &mdash; {{post.date | date_to_long_string}}</li>
+{% if post.date > Date.parse('2011-01-01') %}
+<li><a href="{{post.url}}">{{post.title}}</a> &middot; {{post.date | date_to_long_string}}</li>
+{% endif %}
 {% endfor %}
 </ul>
 </p>
