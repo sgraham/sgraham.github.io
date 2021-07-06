@@ -15,6 +15,9 @@
                 <h2>All entries</h2>
                 <ul class="posts">
                     {% for post in site.posts %}
+                    {% assign cutoff = '2021-01-01' | date: '%s' %}
+                    {% capture posttime %}{{post.date | date: '%s'}}{% endcapture %}
+                    {% if posttime <= cutoff %}
                     <li>
                         <a  onmouseover="showDate('{{ post.id | replace:'/','-' }}', true);"
                             onmouseout="showDate('{{ post.id | replace:'/','-' }}', false);"
