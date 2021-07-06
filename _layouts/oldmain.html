@@ -8,6 +8,12 @@
     <body>
         <div id="canvas">
             <div class="intro">
+
+              <h1>
+                This site is for archivial and Cool URIs Don't Change
+                purposes. You probably won't find anything interesting here!
+              </h1>
+
                 <h1>Scott Graham</h1>
 
                 <p>Welcome to <b>h4ck3r.net</b>, my personal website. You can
@@ -35,11 +41,12 @@
 
             <div>
                 <h2>Blog</h2>
-                <p>This site is for archivial and Cool URIs Don't Change purposes. It's probably all junk.</p>
                 <h4>(Not at all) Recently</h4>
                 <ul class="posts">
                     {% for post in site.posts limit: 3 %}
-                    {% if Date.parse(post.date) <= Date.parse('2011-01-01') %}
+                    {% assign cutoff = '2021-01-01' | date: '%s' %}
+                    {% capture posttime %}{{post.date | date: '%s'}}{% endcapture %}
+                    {% if posttime <= cutoff %}
                     <li>
                         <a  onmouseover="showDate('{{ post.id | replace:'/','-' }}', true);"
                             onmouseout="showDate('{{ post.id | replace:'/','-' }}', false);"
@@ -74,4 +81,4 @@
             </p>
         </div>
     </body>
-</html>
+  </html>
