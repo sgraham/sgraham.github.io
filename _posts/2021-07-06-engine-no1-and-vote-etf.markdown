@@ -6,7 +6,7 @@ title: Engine No.1 and VOTE ETF
 I hadn't heard about Engine No.1 until everyone else did (when they
 executed on what seemed like a [clever PR
 stunt](https://www.reuters.com/business/energy/exxon-faces-proxy-fight-launched-by-new-activist-firm-engine-no-1-2020-12-11/)
-of wrestling away a few board seats [on the Exxon
+of wrestling away a few seats [on the Exxon
 board](https://reenergizexom.com/board-candidates/)).
 
 Most of the news briefs made it sound like they'd gotten some
