@@ -5,10 +5,10 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>Scott Graham's blog at h4ck3r.net</title>
- <link href="http://h4ck3r.net/atom.xml" rel="self"/>
- <link href="http://h4ck3r.net/"/>
+ <link href="https://h4ck3r.net/atom.xml" rel="self"/>
+ <link href="https://h4ck3r.net/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://h4ck3r.net/</id>
+ <id>https://h4ck3r.net/</id>
  
  {% for post in site.posts %}
  <entry>
