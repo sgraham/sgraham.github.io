@@ -28,4 +28,8 @@ if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
 } else {
   alert('Wake Lock API not supported.');
 }
+
+var path = window.location.pathname;
+var page = path.split("/").pop();
+document.write('<p><a href="https://github.dev/sgraham/sgraham.github.io/blob/master/recipes/' + page + '">Edit</a></p>');
 })();
