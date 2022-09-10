@@ -12,7 +12,7 @@ For some reason this seems to be popular in Germany in particular, so
 I've been watching an inordinate number of YouTube videos in German with
 closed captioning and using Google Translate to auto-translate to
 English as I regrettably don't speak German. (It doesn't work that
-well.) In any case there's a surprising number of people making their
+well.) In any case, there's a surprising number of people making their
 own "Fahrradwohnwagen"s or "FaWoWa" if you suck at German spelling, as I
 do. If you want a taste, check out this [recent
 meetup](https://www.youtube.com/watch?v=BWR7fUVk9Z8)!
@@ -32,8 +32,8 @@ typically not quite as light as bike-towable). It consists of using
 regular pink foam insulation board as the structure, and then wrapping
 it in some sort of fibreglassing. The classic foamie uses "PMF" (Poor
 Man's Fibreglass) rather than actual glass fibres with epoxy. Instead it
-uses plain cotton, canvas, a specific type of water-resistant wood glue,
-and then a specific way of using exterior paint to create what is by
+uses plain cotton canvas, a specific type of water-resistant wood glue,
+and then a specific recipe of exterior latex paint to create what is by
 most accounts a surprisingly robust and durable exterior finish.
 
 After an embarrassing amount of time in SketchUp coming up with
@@ -42,8 +42,8 @@ under-documented (or German-documented!) techniques I really should
 start as simple as possible, and so my "design" for a [Brutalist Bike
 Trailer](/images/bike-trailer-2022-09-09.png) (as in the architecture
 style, but realistically also pretty brutal to spend time in). It's
-basically a box with wheels, air holes, a door and a window, and I'm not
-sure about keeping the window.
+basically a box with wheels, air holes, a door, and a window, and I'm
+not sure about keeping the window.
 
 Today was the first day I had some time to try some actual work on it in
 the garage. It went [very badly](https://youtu.be/9x7fDlGmmzs), during
