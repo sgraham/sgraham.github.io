@@ -204,7 +204,7 @@ PSI measurements again, and sorting:
 | Untreated | 2708 |
 | Kraft 1/1 | 17710 |
 | Fibreglass | 19288 |
-| Kraft 2/2 | 22811 |
+| Kraft 2/2 | 22811 | [^4]
 | Kraft 1/2 | 30582 |
 | Kraft 2/3 | 40985 |
 
@@ -240,6 +240,8 @@ wouldn't work that well.
 [^2]: Just because! This is Engineering and I don't need to hear about "why are doing this?". This number goes in the next crazy formula, so we're darn well going to get it.
 
 [^3]: Look, we're second-string programmers pretending to be civil engineers building a bridge out of foam and paper. Just plug the damn numbers in.
+
+[^4]: That 2/2 is measured as weaker than 1/2 is not a show of strength for my data. This is likely because 2/2 was the first one I did, and I didn't wait for a full cure between layers, so it's probably more like "1.5/1.5" or worse.
 
 
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
