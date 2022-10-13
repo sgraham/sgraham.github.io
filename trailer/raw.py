@@ -424,6 +424,48 @@ Vyoutube IctAURh0MLs
 <p>Also tried a test fit of the floor onto the frame, and the whole thing actually seems fairly solid so far, especially given the partial construction and the building materials!</p>
 
 youtube wOG5LMLT59Q
+
+Disassembled the old kids trailer and made some matching holes in the aluminum tubing to be used
+up the length of the body.
+
+../images/trailer/PXL_20221012_191316292.jpg
+../images/trailer/PXL_20221012_191941030.jpg
+../images/trailer/PXL_20221012_192437831.jpg
+../images/trailer/PXL_20221012_194037513.jpg
+../images/trailer/PXL_20221012_194042639.jpg
+Vyoutube J1YwRDVb3uw
+Vyoutube BgG_g3jH-Ao
+../images/trailer/PXL_20221012_201420758.jpg
+
+<p>Working on the drawbar to attach to the bike. Start by disassembling the donor trailer, and try to figure out how we're going to attach it to the frame.</p>
+<p>I realized because it has two of the grey parts to attach its frame to the curved part that attaches to the bike, we can actually use the "off" side, but upside down. That way the old kids trailer will still remain usable as a cargo trailer just by swapping the wheels over still.</p>
+<p>I took the frame outside to try attaching to the bike, very fortunately with the frame bar attached only with clamps. I was mostly only testing to see if it was the right offset from the middle, but as it happened I had put it on the wrong side (the cog/derailleur side of the bike), because of course the trailer was upside down! So that was a lucky break.</p>
+<p>After a test run, found another metal tie thing lying around, and then went to get some carriage bolts to bolt the drawbar into place. I don't think it qualifies as bulletproof, but solid enough. I weighed it just after the camera died, and the total frame is just under 20 lbs, so I think the whole trailer should able to come in under 50 lbs unloaded.</p>
+
+youtube DL9RTN8ye4A
+
+Realize that I clamped it on the wrong side (fortunately only clamped, not
+bolted!) and then take it for a quick test ride with a co-pilot. I really need
+to get some sort of a tripod that's better than "balance awkwardly on
+workbench".
+
+youtube uQiiManpb8o
+youtube QiUqCbQ7O6A
+../images/trailer/PXL_20221012_231612004.jpg
+../images/trailer/PXL_20221012_231616276.jpg
+
+Get things properly bolted down for real (on the correct side this time).
+
+../images/trailer/PXL_20221013_025701638.jpg
+
+<p>Prop up the walls on the frame and floor to confirm it all fits. The unplanned door reinforcement that I added at the last minute while glueing the inside butts out, so either it or the floor will have to be trimmed where they meet.</p>
+<p>I'm not quite sure how I'm going to actually assemble the walls at this point. I think I'll have to make a shelf at the back, and some sort of support structure at the top and maybe front so that there's some supports to clamp and rest them against.</p>
+
+../images/trailer/PXL_20221013_031158862.jpg
+../images/trailer/PXL_20221013_031254997.jpg
+../images/trailer/PXL_20221013_032310747.jpg
+../images/trailer/PXL_20221013_031756581.jpg
+../images/trailer/PXL_20221013_031823301.jpg
 '''
 
 header = r'''<!DOCTYPE html>
