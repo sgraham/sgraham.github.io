@@ -458,7 +458,7 @@ Get things properly bolted down for real (on the correct side this time).
 
 ../images/trailer/PXL_20221013_025701638.jpg
 
-<p>Prop up the walls on the frame and floor to confirm it all fits. The unplanned door reinforcement that I added at the last minute while glueing the inside butts out, so either it or the floor will have to be trimmed where they meet.</p>
+<p>Prop up the walls on the frame and floor to confirm it all fits. The unplanned door reinforcement that I added at the last minute while gluing the inside butts out, so either it or the floor will have to be trimmed where they meet.</p>
 <p>I'm not quite sure how I'm going to actually assemble the walls at this point. I think I'll have to make a shelf at the back, and some sort of support structure at the top and maybe front so that there's some supports to clamp and rest them against.</p>
 
 ../images/trailer/PXL_20221013_031158862.jpg
@@ -466,6 +466,40 @@ Get things properly bolted down for real (on the correct side this time).
 ../images/trailer/PXL_20221013_032310747.jpg
 ../images/trailer/PXL_20221013_031756581.jpg
 ../images/trailer/PXL_20221013_031823301.jpg
+
+
+Testing to see how the router works in foam. It's pretty easy, other than spraying pink (though actually not as bad as I expected).
+
+../images/trailer/PXL_20221014_164300998.jpg
+../images/trailer/PXL_20221014_164311245.jpg
+
+Test piece seems to work OK.
+
+../images/trailer/PXL_20221014_164845705.jpg
+../images/trailer/PXL_20221014_170211926.jpg
+../images/trailer/PXL_20221014_170214595.jpg
+
+So bite the bullet and hit the real wall pieces. I measured and fiddled for
+quite a while because I was nervous about having to remake these walls. It seems
+to fit pretty well and I think it'll help quite a bit with stability and glue up
+as well. I'm not sure if the shelf will even need extra support or not once it's
+laminated.
+
+../images/trailer/PXL_20221014_173328801.jpg
+../images/trailer/PXL_20221014_175138046.jpg
+../images/trailer/PXL_20221014_175144018.jpg
+../images/trailer/PXL_20221014_175540213.jpg
+../images/trailer/PXL_20221014_230331714.jpg
+../images/trailer/PXL_20221014_232658612.jpg
+
+<p>I definitely need some cross pieces to have any chance of gluing the walls to the floor. I'd been planning on a shelf above feet so making it "structural" to help hold the walls, at least during gluing seemed like it would work.</p>
+<p>I tried a simple piece that was the width of the floor first, but that was going to be hard to use (though the glue would have held it fine I think), but then decided I'd cut out a shallow groove in the walls for the shelf to fit into.</p>
+<p>So most of this is me remembering how to use a router (you don't need to do it too "right" when routing foam, it's like it's not even there so you can go any direction and it won't pull, etc.) and then trying to figure out how to clamp a routing guide (without any long-mouthed clamps) to try to cut the groove straight.</p>
+<p>I moved the camera for the second wall, so there's a closeup of one side. It's not very obvious in the video, but it does spray quite a lot of pink "sawdust" everywhere.</p>
+<p>It seemed to work pretty well overall so far. I'll probably need to also do something similar at the front and somewhere along the top. Not sure yet I can do something in those spots that can be functional and structural. Perhaps some extra support on the front wall for leaning up against to make that wall more durable.</p>
+
+youtube s_oFJas1H9w
+
 '''
 
 header = r'''<!DOCTYPE html>
