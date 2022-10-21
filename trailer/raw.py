@@ -500,6 +500,13 @@ laminated.
 
 youtube s_oFJas1H9w
 
+Glued up the lamination for one side the shelf and the inside of the door, with assistance.
+
+../images/trailer/PXL_20221018_211611977.jpg
+../images/trailer/PXL_20221018_214139747.jpg
+../images/trailer/PXL_20221018_214318331.jpg
+../images/trailer/PXL_20221018_214749633.jpg
+../images/trailer/PXL_20221018_220233288.jpg
 '''
 
 header = r'''<!DOCTYPE html>
