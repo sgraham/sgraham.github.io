@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Chromecast dashboard</title>
+
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin+Condensed:700">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+  </head>
+  <body>
+    <p>
+      Enter a Url for to display on dashboard and if the page does not update
+      itself then enter an appropriate refresh interval in seconds.
+    </p>
+    <form method="get" action="JavaScript:connect();">
+      <label>Url <input type="text" id="url" placeholder="http://www.gabenewell.org/"></label>
+      <button type="submit">Launch</button>
+    </form>
+    <!-- For some reason the 'number' field stops form action from firing -->
+    <label>Refresh <input type="number" id="refresh" min="0" value="0"></label>
+    <button id="kill" disabled>Stop casting</button>
+    <p id="post-note" style="display: none">
+      If the page does not load please be sure HTTP header X-Frame-Options
+      allows the page to be loaded inside a frame not on the same origin.
+    </p>
+  </body>
+
+  <!-- Post load all the goods used to interact with Chromecast/receiver. -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://underscorejs.org/underscore-min.js"></script>
+  <script src="main.js"></script>
+
+  <!-- Start of StatCounter Code for Default Guide -->
+  <script type="text/javascript">
+  var sc_project=9400224;
+  var sc_invisible=1;
+  var sc_security="c2ba274b";
+  var scJsHost = (("https:" == document.location.protocol) ?
+  "https://secure." : "http://www.");
+  document.write("<sc"+"ript type='text/javascript' src='" +
+  scJsHost+
+  "statcounter.com/counter/counter.js'></"+"script>");
+  </script>
+  <noscript><div class="statcounter"><a title="free hit
+  counter" href="http://statcounter.com/free-hit-counter/"
+  target="_blank"><img class="statcounter"
+  src="http://c.statcounter.com/9400224/0/c2ba274b/1/"
+  alt="free hit counter"></a></div></noscript>
+  <!-- End of StatCounter Code for Default Guide -->
+</html>
