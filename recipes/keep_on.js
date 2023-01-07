@@ -31,6 +31,6 @@ if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
 
 var path = window.location.pathname;
 var page = path.split("/").pop();
-document.write('<p><a href="cast/cast-redirect.html?url=' + path + '">Cast</a><br/>');
+document.write('<p><a href="cast/cast-redirect.html?url=' + window.location.href + '">Cast</a><br/>');
 document.write('<a href="https://github.dev/sgraham/sgraham.github.io/blob/master/recipes/' + page + '">Edit</a></p>');
 })();
