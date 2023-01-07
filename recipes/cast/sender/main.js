@@ -7,12 +7,10 @@ var namespace = 'urn:x-cast:com.boombatower.chromecast-dashboard';
 var session = null;
 
 if (!chrome.cast || !chrome.cast.isAvailable) {
-  console.log("here!");
   setTimeout(initializeCastApi, 1000);
 }
 
 function initializeCastApi() {
-  console.log("here2!");
   var sessionRequest = new chrome.cast.SessionRequest(applicationID);
   var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
     sessionListener,
