@@ -1,0 +1,161 @@
+---
+layout: newpost
+title: C JIT
+---
+
+**Everyone**: Look at this amazing LLM that became sentient and induced
+the Singularity and now knows the deep purpose of my personal life and
+can describe it to me in the style of Yeats or Lewis Carroll or Weird
+Al!
+
+**Me**: Look at this [C compiler](https://github.com/sgraham/dyibicc)
+I'm working on! Hey, is it 1979?
+
+---
+
+About a month ago I saw a [demo of Tomorrow
+Corporation](https://www.youtube.com/watch?v=72y2EC5fkcE)'s development
+tools and was inspired [^1]. It's definitely worth watching, but for the
+sake of exposition, they've[^2] developed a custom front- and back-end
+of a compiler, a debugger, IDE, and integrated them all into their build
+system, source control, and game engine with a deterministic replay
+system (what I've always called "Saved Inputs" from a great internal
+tool that we had on *FIFA* twenty-ish years ago). Aside from the
+specific features, I think the most satisfying parts are the speed of
+changes and the integration of all the features together into a coherent
+whole. (I'm sure there are hidden sharp corners! But it makes for a
+great demo.)
+
+Now, I haven't worked at a game company in a **very** long time. And I
+don't really have a desire to make indie 2D games in an absurdly
+competitive marketplace where I don't even have time to find out about
+all the amazing games that come out, never mind acquire them, never mind
+actually spend time playing them.
+
+But I'm not going to let trivial little things like "being not at all
+practical or useful" get in the way!
+
+I've been playing with my own programming language (with too many
+features and too much complexity) on and off for a long time. And more
+recently I've been puttering with [Brett
+Slatkin](https://twitter.com/haxor)'s (coming-soon)
+[Pique](https://piquelang.org/).
+
+Both of those are fun and interesting, but this imaginary new system
+would need insta-compile as well as smooth system integration which to
+me meant it would have to be (or at least start as) plain ol' C.
+
+Rui Ueyama wrote [chibicc](https://github.com/rui314/chibicc) as a
+teaching tool, and it's a great read. The code is clear and tends
+towards using the simplest possible algorithm or data representation.
+All the same, it's plenty fast (we are pretending it's 1979 after all,
+so the computer I'm typing on is inconceivably fast). The code is also
+very *hackable*, and I'm sure there are (or will be) many forks and
+variants of it.
+
+So starting with chibicc as a base[^3], I first [mostly-mechanically changed
+it to output
+`nasm`](https://github.com/sgraham/dyibicc/commit/d2fae633732f104b64face58befc994f38c100c1)
+syntax rather than **awful**[^4] AT&T syntax. That has a few gotchas
+(e.g. `nasm` [can't reference an external symbol named
+"wait"](https://github.com/sgraham/dyibicc/commit/33fcb55fec1ded391ab9ede4434e21e89067f734)
+lolz) and I had to hunt for a while for a few instructions where I had
+missed fixing the order of the operands.
+
+But with that working, it seemed tractable to nuke the generation of .s
+or .asm files entirely, and just compile to memory. I've always wanted
+to use LuaJIT's subproject [DynASM](https://luajit.org/dynasm.html).
+It's unrelated to Lua other than it's used to implement LuaJIT, and its
+preprocessing tool happens to be written in Lua. DynASM is a very
+elegant and compact way of integrating a macro assembler into C code and
+getting all the mess of x86/x64 instruction encoding out of the runtime.
+So in the [next
+step](https://github.com/sgraham/dyibicc/commit/a9646f16d43f159beac94b950e241d7d94fbf9af)
+I added a mode that uses DynASM to directly write SysV Linux x64 machine
+code.
+
+I'm using DynASM a bit unusually, and serializing the machine code to a
+simple bespoke object format (with relocations, externs, etc.) This
+partially because of the original structure of chibicc, and partly just
+because of how C is very translation-unit centric, but in any case
+there's also a simple linker to smoosh the bits together at the end. I
+guess this is where I will try to integrate the hot code reload later.
+
+With that working, it didn't seem too much of a stretch to also add
+[Windows
+ABI](https://github.com/sgraham/dyibicc/commit/95ad79feb81cba17dd9c3f6b842561d3f5abd564)
+support. This was a little trickier but not too bad. The basics are easy
+enough (which registers, in which order, how the stack is laid out, and
+so on).
+
+But in order to work usefully, the compiler also needs to be able to
+include Microsoft's SDK and the MSVC CRT headers, which is its own
+fairly messy undertaking.
+
+The Windows calling convention is also a bit crufty[^5], having been
+established before SysV x64. One small detail I actually didn't realize
+before doing this that the struct size limit for register passing is
+only 1/2/4/8 bytes on Windows. So, for example if you have a type like
+this (that is 16 bytes on x64):
+
+    typedef struct Slice {
+      int* data;
+      size_t len;
+    } Slice;
+
+Then, a function prototyped as
+
+    void my_func(Slice slice);
+
+is exactly equivalent to
+
+    void my_func(Slice* slice);
+
+in terms of memory dereferences in the function body. And additionally,
+it's getting passed on the stack either way, never in registers.
+
+But the first variant is actually **worse** at the callsites (because it
+of course has to maintain value semantics), so the caller has to make a
+duplicate copy of the struct on the stack, and then additionally pass a
+pointer to the copy. The ol' *sufficiently smart* inlining and
+intra-procedural-optimizing compiler can of course recover from this,
+but: 1) this compiler is definitely not those things; and 2) it's a
+kinda junky default.
+
+SysV has a limitation of this sort too of course, but it's at a more
+convenient 16 byte limit, and it also passes the copy directly on the
+stack, rather than also passing a pointer to the thing that's almost
+definitely going to be stack allocated-and-copied already. This one was
+also less amenable to being shoehorned into chibicc and seemed to
+require messing around back in the parser which is why I'm a bit more
+salty about it.
+
+**Anyway!**
+
+With that futzing around, I have a handy-dandy two-platform C11 JIT
+compiler that's pretty quick and all self-contained in a small managable
+code base. The generated code[^6] is typical stack-machine (i.e.
+terrible), but again, computers are unimaginably fast back here in 1979,
+so I can't really perceive the compile or execution time yet[^7].
+
+My "bug tracker" and "task list" are the [top of
+main.c](https://github.com/sgraham/dyibicc/blob/main/main.c) so maybe
+some of those things will be next for the the compiler. I think maybe
+the next step will be to get it integrated into an SDL shell where it
+can draw stuff and play beeps and read the controller.
+
+---
+
+[^1]: My wife jokes that I somehow manage to rathole every non-trivial programming project down to "First, I need to write a new programming language...".
+
+[^2]: As far as I can tell, "they" is only a couple programmers (and possibly only one person working on these tools?), which both invites imposter syndrome and is also encouraging, because hey, I am also one person.
+
+[^3]: There are of course lots of other ways I could have tried to do this: LLVM, clang mods, DLLs, rip-and-link the output of other compilers, etc., etc. But I'm finally feeling like programming for the first time since August 2021 (when I left big G...), and so the only real goal of this project is fun. And this seemed more fun.
+
+[^4]: Nico has made many outstanding contributions to our collective software world, but perhaps none better than [this](https://lists.llvm.org/pipermail/cfe-commits/Week-of-Mon-20140512/105330.html) don't @ me.
+
+[^5]: I mean, it's definitely better than 32 bit x86, but.
+
+[^6]: I might actually tackle some peephole optimizing, but more because making the disassembly more concise would be make debugging it easier if it weren't obscured by many push/pop/redundant movs.
+
+[^7]: The full set of tests take a few seconds to run, but it's mostly in printf and terminal delay.
