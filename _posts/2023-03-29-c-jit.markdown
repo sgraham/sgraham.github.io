@@ -94,10 +94,10 @@ fairly messy undertaking.
 
 The Windows calling convention is also a bit crufty[^5], having been
 established before SysV x64 and semi-following the existing x86 calling
-convention. One small detail I actually didn't realize before doing this
-that the struct size limit for register passing is only 1/2/4/8 bytes on
-Windows. So, for example if you have a type like this (that is, 16 bytes
-on x64):
+convention. One small detail I actually didn't realize before doing
+this, is that the struct size limit for register passing is only 1/2/4/8
+bytes on Windows. So, for example if you have a type like this (that is,
+16 bytes on x64):
 
     typedef struct Slice {
       int* data;
