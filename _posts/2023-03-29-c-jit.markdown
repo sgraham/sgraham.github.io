@@ -93,10 +93,11 @@ include Microsoft's SDK and the MSVC CRT headers, which is its own
 fairly messy undertaking.
 
 The Windows calling convention is also a bit crufty[^5], having been
-established before SysV x64. One small detail I actually didn't realize
-before doing this that the struct size limit for register passing is
-only 1/2/4/8 bytes on Windows. So, for example if you have a type like
-this (that is 16 bytes on x64):
+established before SysV x64 and semi-following the existing x86 calling
+convention. One small detail I actually didn't realize before doing this
+that the struct size limit for register passing is only 1/2/4/8 bytes on
+Windows. So, for example if you have a type like this (that is, 16 bytes
+on x64):
 
     typedef struct Slice {
       int* data;
@@ -111,8 +112,8 @@ is exactly equivalent to
 
     void my_func(Slice* slice);
 
-in terms of memory dereferences in the function body. And additionally,
-it's getting passed on the stack either way, never in registers.
+in terms of memory dereferences in the function body, and it's not
+getting passed in registers in either case.
 
 But the first variant is actually **worse** at the callsites (because it
 of course has to maintain value semantics), so the caller has to make a
