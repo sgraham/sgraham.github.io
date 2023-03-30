@@ -4,9 +4,9 @@ title: C JIT
 ---
 
 **Everyone**: Look at this amazing LLM that became sentient and induced
-the Singularity and now knows the deep purpose of my personal life and
-can describe it to me in the style of Yeats or Lewis Carroll or Weird
-Al!
+the Singularity and now knows the deep purpose of my own personal life
+and can describe it to me in the style of Yeats or Lewis Carroll or
+Weird Al!
 
 **Me**: Look at this [C compiler](https://github.com/sgraham/dyibicc)
 I'm working on! Hey, is it 1979?
@@ -149,7 +149,7 @@ can draw stuff and play beeps and read the controller.
 
 [^1]: My wife jokes that I somehow manage to rathole every non-trivial programming project down to "First, I need to write a new programming language...".
 
-[^2]: As far as I can tell, "they" is only a couple programmers (and possibly only one person working on these tools?), which both invites imposter syndrome and is also encouraging, because hey, I am also one person.
+[^2]: As far as I can tell, "they" is only a couple programmers (and possibly only one person working on these tools?), which both invites imposter syndrome and is also encouraging, because hey, I am also only one person.
 
 [^3]: There are of course lots of other ways I could have tried to do this: LLVM, clang mods, DLLs, rip-and-link the output of other compilers, etc., etc. But I'm finally feeling like programming for the first time since August 2021 (when I left big G...), and so the only real goal of this project is fun. And this seemed more fun.
 
