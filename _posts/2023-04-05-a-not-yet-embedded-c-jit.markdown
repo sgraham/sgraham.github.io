@@ -106,7 +106,7 @@ object.
 
 In particular, there's **no pointer** being added. The address of
 `labels` is still at some arbitrary offset in the data segment (just
-also offset by the `offsetof(CompilerState, labels)`, so as I was doing
+also offset by the `offsetof(CompilerState, labels)`), so as I was doing
 this, I assumed it would be neutral performance-wise.
 
 But it very much wasn't. I didn't notice at first, but the tests went
