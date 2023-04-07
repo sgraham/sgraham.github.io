@@ -99,18 +99,24 @@ this, is that the struct size limit for register passing is only 1/2/4/8
 bytes on Windows. So, for example if you have a type like this (that is,
 16 bytes on x64):
 
-    typedef struct Slice {
-      int* data;
-      size_t len;
-    } Slice;
+```c
+typedef struct Slice {
+  int* data;
+  size_t len;
+} Slice;
+```
 
 Then, a function prototyped as
 
-    void my_func(Slice slice);
+```c
+void my_func(Slice slice);
+```
 
 is exactly equivalent to
 
-    void my_func(Slice* slice);
+```c
+void my_func(Slice* slice);
+```
 
 in terms of memory dereferences in the function body, and it's not
 getting passed in registers in either case.

@@ -3,11 +3,11 @@ layout: newpost
 title: A not yet embedded C JIT
 ---
 
-After getting the absolute bare bones of a [C
-JIT](https://scot.tg/2023/03/29/c-jit/) working, I wanted to try to
-embed it in a small 2D game engine. When I tried to do that, it was clear
-it needed some re-organization to be a pleasant concise embedding that
-didn't require the embedder to know the full internals of the compiler.
+After getting the absolute bare bones of a [C JIT](/2023/03/29/c-jit/)
+working, I wanted to try to embed it in a small 2D game engine. When I
+tried to do that, it was clear it needed some re-organization to be a
+pleasant concise embedding that didn't require the embedder to know the
+full internals of the compiler.
 
 ## Embedding
 
@@ -71,7 +71,7 @@ However! When I did this, I discovered it had an appreciable **negative
 performance effect**. The change is not too complicated and changes
 **this**:
 
-```
+```c
 static Node* labels;
 
 void parse(...) {
@@ -87,7 +87,7 @@ void parse(...) {
 
 **into this**:
 
-```
+```c
 #define C(x) compiler_state.x
 
 void parse(...) {
@@ -155,7 +155,7 @@ which, yeah...
 In any case, with some hacking, and some questionable predefinitions,
 and some unimplemented intrinsic stubs, and a soupçon of debugging:
 
-```
+```c
 #include <windows.h>
 int main(void) {
   SetProcessDPIAware();
