@@ -110,16 +110,16 @@ seems that you mostly don't want that.
 
 But! You do also want to be able to tweak e.g. string constants, so
 things in `.rodata`/`.rdata` need to be updated to their new values.
-This wasn't entirely obvious, as `dyibicc` inherited `chibicc`s lack of
+This wasn't entirely obvious, as `dyibicc` inherited `chibicc`'s lack of
 distinguishing `.rodata` data from `.data` data. They're somewhat
 teased apart now, but there's likely more to do there.
 
-It then becomes fuzzy and requires understanding user-intent if you e.g.
-have an array of function pointers that's globally initialized.
-Specifically, this is a reference from `.data` into `.text` or from
-variable into constant. In the current implementation, those will not
-update properly. When a new implementation of a function is linked in,
-and the old one removed, the new function will be at a different
+It becomes fuzzy and requires understanding user-intent if you e.g. have
+an array of function pointers that's globally initialized. Specifically,
+a reference from `.data` into `.text`, or to put it another way from
+"variable" into "constant". In the current implementation, those will
+not update properly. When a new implementation of a function is linked
+in, and the old one removed, the new function will be at a different
 address. But the random `void*` stashed away in an array no longer has
 any real association with that function (at least by name) so the array
 will end up forever pointing to the first implementation of the
@@ -139,17 +139,20 @@ sounds funny out loud, but I think it makes sense.
 ## An unscripted demo
 
 That wall of text doesn't really make it seem that cool, but it kind of
-is! I thought I would try to record a short video, because seeing it
-update in realtime is the neat thing. But as I'm lacking **Streamer Star
-Charisma** and snazzy video production, we instead have to settle for a
-video of me mumbling, while typing slowly and making typos, discovering
-bugs, and forgetting what I was going to talk about. But maybe you can
-kind of see what's going on and how it could be neat.
+is! I thought I would try to record a short-but-captivating video,
+because seeing it update in real time is the neat thing.
+
+But as I'm lacking **Streamer Star Charisma** and snazzy video
+production, we instead have to settle for a video of me mumbling, while
+typing slowly and making typos, discovering bugs, and forgetting what I
+was going to talk about. But maybe you can kind of see what's going on
+and how it could be neat.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Di-GK1RkYh8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 (You'll need to open it on YT and make sure it's set to 1080p and
-fullscreen or you're definitely not going to get anything out of it.)
+fullscreen or you're definitely not going to be able to see what's going
+on.)
 
 ---
 
