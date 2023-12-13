@@ -31,5 +31,5 @@ if ('wakeLock' in navigator && 'request' in navigator.wakeLock) {
 
 var path = window.location.pathname;
 var page = path.split("/").pop();
-document.write('<a href="https://github.dev/sgraham/sgraham.github.io/blob/master/recipes/' + page + '">Edit</a></p>');
+document.write('<br><a href="https://github.dev/sgraham/sgraham.github.io/blob/master/recipes/' + page + '">Edit</a></p>');
 })();
