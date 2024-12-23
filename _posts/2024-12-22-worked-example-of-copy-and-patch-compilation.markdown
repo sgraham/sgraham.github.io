@@ -15,30 +15,31 @@ hole of a project, but it's still deep in "not working yet" phase.
 
 Along the way [I had a
 vision](https://scot.tg/2024/12/20/60-fps-compiler/) that I'm sure is
-oft-repeated in various forms by other old people: "My Turbo Pascal
-projects [compiled in, like, a
-second](https://youtu.be/E6TxE8dQOIA?si=G8sRJv5lByNgSvzL&t=990)", and
-were running on a computer (charitably, let's say a `486DX33`) that ran
-at 33MHz, whereas the computer I'm sitting at now runs at 3.8GHz. That's
-_at least_ 100 times faster, and that's before we even consider the fact
-that the modern one has 24 cores vs. the old one having exactly one! And
-yet somehow, I'm able to read most of reddit/lobste.rs/this blog post while
-waiting for my C++/Rust/whatever to compile and link. Are today's
-projects bigger? Sure, of course. Are they so much bigger and badly
-designed that we need to throw away something like a ~2400x difference
-in performance?
+oft-repeated in various forms by other old people:
+
+"My Turbo Pascal projects [compiled in, like, a second](https://youtu.be/E6TxE8dQOIA?si=G8sRJv5lByNgSvzL&t=990)",
+
+and were running on a computer (charitably, let's say a `486DX33`) that
+ran at 33MHz, whereas the computer I'm sitting at now runs at 3.8GHz.
+That's _at least_ 100 times faster, and that's before we even consider
+the fact that the modern one has **24** cores vs. the old one having
+exactly **one**! And yet somehow, I'm able to read most of
+reddit/lobste.rs/this blog post while waiting for my C++/Rust/whatever
+to compile and link. Are today's projects bigger? Sure, of course. Are
+they so much bigger and badly designed that we need to throw away
+something like a ~2400x difference in performance?
 
 So! With that motivational speech in my mind, I checked my own toy
 compiler and found it, not surprisingly, disappointingly slow[^1].
 
-I started investigating at a bunch of restructuring ideas, but codegen
-was the biggest piece of the pie, and also seems to be most variable. The
-[copy-and-patch](https://arxiv.org/pdf/2011.13127) paper from 2021 was a
-neat twist on other older snippet-like approaches and when you read the paper
-it sounds relatively straightforward, other than a few details like how
-you actually perform some of the transformations, how registers are
-allocated and tracked etc. There is an [associated code
-repository](https://github.com/sillycross/PochiVM), but I found the
+I started investigating a bunch of restructuring ideas, but codegen was
+the biggest piece of the pie, and also seems to be most variable
+time-wise. The [copy-and-patch](https://arxiv.org/pdf/2011.13127) paper
+from 2021 was a neat twist on other older snippet-like approaches. And
+when you read the paper it sounds relatively straightforward, other than
+a few details like how you actually perform some of the transformations,
+how registers are allocated and tracked etc. There is an [associated
+code repository](https://github.com/sillycross/PochiVM), but I found the
 essential details are very obscured[^2] by
 [piles](https://github.com/sillycross/PochiVM/blob/master/pochivm/arith_expr_fastinterp.cpp)
 [of](https://github.com/sillycross/PochiVM/blob/master/pochivm/ast_catch_throw_fastinterp.cpp)
@@ -47,9 +48,10 @@ essential details are very obscured[^2] by
 and the extensive (excessive?) C++ template metaprogramming employed for
 the application they've chosen to apply the technique to.
 
-In the interests of clarifying it in my own mind (and for future me who
-forgets how it works in a few months), I thought I'd make a standalone
-example of the technique, and note some things that seemed subtle.
+In the interests of clarifying it in my **own** mind (and for future me
+who will likely forget how it works in a few months), I thought I'd make
+a standalone example of the technique, and note some things that seemed
+subtle.
 
 ## Copy-and-patch compilation
 
@@ -84,17 +86,17 @@ int do_add(void) {
 ```
 
 Then, if you parse the object file, because the variables are `extern`
-it necessarily has to generate two relocation records for the linker to
-fix up. Instead of replacing them with addresses when we rip the code
-out of the object file, we instead replace them with the _actual values_
-we want to add.
+it necessarily has to generate two relocation records (for `K0` and `K1`
+for the linker to fix up. Instead of replacing them with _addresses_ when
+we rip the code out of the object file, we instead replace them with the
+_actual values_ we want to add.
 
 This is a bit better, but the second trick makes it even better. Instead
 of performing an operation in normal function and returning the result,
 we change the stencils in two ways. The first is to change the calling
 convention to the
-[GHC](https://llvm.org/docs/LangRef.html#calling-conventions). This
-unusual calling convention has _no_ callee save registers. The second
+[GHC](https://llvm.org/docs/LangRef.html#calling-conventions) one. This
+very unusual calling convention has _no_ callee save registers. The second
 change is to make every function take a continuation and tail call (so
 it doesn't _need_ to save any registers).
 
@@ -215,6 +217,13 @@ we don't want to make this assumption. That is, that it should allow a
 full 8 byte address when loading the value of the variable. By using
 this flag for some choice snippets (i.e. `uint64_t` const loading) the
 lack of range can be avoided without making all the code less efficient.
+
+Another unfortunate subtlety is that you can't actually tell clang in C
+code to use the GHC calling convention. So instead when generating
+snippets in C we use the (also uncommon, but has a keyword)
+`__vectorcall` calling convention. This gives us a nice simple/dumb
+keyword to replace in the LLVM IR with the annotations that specific
+`ghccc` before having clang generate the final target object file.
 
 ### Using the stencils
 
