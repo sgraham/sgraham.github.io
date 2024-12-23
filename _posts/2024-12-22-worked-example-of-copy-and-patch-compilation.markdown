@@ -11,7 +11,7 @@ probably a poor idea, but that writing a completely new language made
 sense (?). Or was at least more fun!
 
 In any case, I have been grappling on-and-off with that enjoyable black
-hole of a project, but it's still deep in "not working yet" phase.
+hole of a project, but it's still deep in the "not working yet" phase.
 
 Along the way [I had a
 vision](https://scot.tg/2024/12/20/60-fps-compiler/) that I'm sure is
@@ -23,11 +23,13 @@ and were running on a computer (charitably, let's say a `486DX33`) that
 ran at 33MHz, whereas the computer I'm sitting at now runs at 3.8GHz.
 That's _at least_ 100 times faster, and that's before we even consider
 the fact that the modern one has **24** cores vs. the old one having
-exactly **one**! And yet somehow, I'm able to read most of
-reddit/lobste.rs/this blog post while waiting for my C++/Rust/whatever
-to compile and link. Are today's projects bigger? Sure, of course. Are
-they so much bigger and badly designed that we need to throw away
-something like a ~2400x difference in performance?
+exactly **one**!
+
+And yet somehow, I'm able to read most of reddit/lobste.rs/this blog
+post while waiting for my C++/Rust/whatever to compile and link. Are
+today's projects bigger? Sure, of course. Are they so much bigger and
+badly designed that we need to throw away something like a ~2400x
+difference in performance?
 
 So! With that motivational speech in my mind, I checked my own toy
 compiler and found it, not surprisingly, disappointingly slow[^1].
@@ -86,10 +88,10 @@ int do_add(void) {
 ```
 
 Then, if you parse the object file, because the variables are `extern`
-it necessarily has to generate two relocation records (for `K0` and `K1`
-for the linker to fix up. Instead of replacing them with _addresses_ when
-we rip the code out of the object file, we instead replace them with the
-_actual values_ we want to add.
+the compiler necessarily has to generate two relocation records (for
+`K0` and `K1`) for the linker to fix up. Instead of replacing them with
+**addresses** when we rip the code out of the object file, we instead
+replace them with the **actual values** we want to add.
 
 This is a bit better, but the second trick makes it even better. Instead
 of performing an operation in a normal function-type way and returning
@@ -104,9 +106,9 @@ So what does that all mean? The "add" function would now look like:
 
 ```c
 extern uintptr_t CONT;
-void GHCCC do_add(int a, int b) {
+void __ghccc do_add(int a, int b) {
     int v = a + b;
-    [[musttail]] return ((void(*GHCCC)(void))&CONT)(v);
+    [[musttail]] return ((void(*__ghccc)(void))&CONT)(v);
 }
 ```
 That is, it takes two arguments, and then instead of returning them,
@@ -143,17 +145,17 @@ other values, you'd instead use:
 
 ```c
 extern uintptr_t CONT;
-void GHCCC do_add_with_2(uintptr_t r0, uintptr_t r1, int a, int b) {
+void __ghccc do_add_with_2(uintptr_t r0, uintptr_t r1, int a, int b) {
     int v = a + b;
-    [[musttail]] return ((void(*GHCCC)(uintptr_t, uintptr_t))&CONT)(r0, r1, v);
+    [[musttail]] return ((void(*__ghccc)(uintptr_t, uintptr_t))&CONT)(r0, r1, v);
 }
 ```
 
 By passing `r0, r1` in, and then passing them on to the continuation in
-the same call location, in this case they will be in `r13` and `rbp`,
-and our addition computation will be in the next registers `r12` and
-`rbx`, so the generated code is identical, except with different
-register allocations:
+the same call location, they will be instead be in `r13` and `rbp`, and
+our addition computation of `a`, `b`, and `v`, will be in the next
+registers `r12` and `rbx` instead. So the generated code is identical,
+except with different register allocations:
 
 ```asm
 do_add_with_2:
@@ -283,13 +285,15 @@ load_2("c")         //  2 NAME 'c'           vstack now [c b &a         ]
 Again, the `_0`, `_1`, `_2` suffixes are telling the generator how many
 registers to pass through untouched, and is calculated by **the number
 of values on the vstack before the call, not including arguments this
-function is actually taking**. Continuing on down the parse tree:
+function is actually taking**. So, continuing on down the parse tree,
+`add` is going to consume two of the vstack values ("b" and "c") and
+wants to keep one ("&a"), so it uses the `_1` variant of `add`.
 
 ```c
 add_1()             //  3 ADD                vstack now [r0 &a          ]
 ```
 
-r0 here represents the result of the add for which we have no name. It
+r0 here represents the result of the add for which there's no name. It
 has a register assigned, but it wouldn't be the first register, that
 would be `&a`.
 
@@ -303,7 +307,7 @@ const_3(3)          //  9 CONST 3            vstack now [3 d r2 &a      ]
 ```
 Slightly badly chosen example data, `const_3(3)` is **both** loading the
 constant "3" for computation, and also `_3` passing through 3 untouched
-registers.
+registers (for "d", "r2", and "&a"). Finishing up:
 
 ```c
 add_2()             // 10 ADD                vstack now [r3 r2 &a       ]
@@ -316,7 +320,7 @@ And we're done!
 ### Generated code
 
 Now that was a lot of futzing around, and you might be thinking "why
-bother", it's a pile of preprocessing when I could just bang out some
+bother?", it's a pile of preprocessing when I could just bang out some
 asm and encode some instructions myself. The upsides are:
 - well-optimized `clang -O3` local code, with the side benefit of clang
   dealing with all the instruction encoding junk
