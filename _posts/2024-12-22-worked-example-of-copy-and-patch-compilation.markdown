@@ -277,9 +277,12 @@ Then, the code to actually do the copy-and-patch compilation using the
 snippets we generated looks like this:
 
 ```c
-load_addr_0("a")    //  0 NAME (lval) 'a'    vstack now [&a             ]
-load_1("b")         //  1 NAME 'b'           vstack now [b &a           ]
-load_2("c")         //  2 NAME 'c'           vstack now [c b &a         ]
+load_addr_0("a")    //  0 NAME (lval) 'a'
+                    //    vstack now [&a             ]
+load_1("b")         //  1 NAME 'b'
+                    //    vstack now [b &a           ]
+load_2("c")         //  2 NAME 'c'
+                    //    vstack now [c b &a         ]
 ```
 
 Again, the `_0`, `_1`, `_2` suffixes are telling the generator how many
@@ -290,7 +293,8 @@ function is actually taking**. So, continuing on down the parse tree,
 wants to keep one ("&a"), so it uses the `_1` variant of `add`.
 
 ```c
-add_1()             //  3 ADD                vstack now [r0 &a          ]
+add_1()             //  3 ADD
+                    //    vstack now [r0 &a          ]
 ```
 
 r0 here represents the result of the add for which there's no name. It
@@ -298,21 +302,30 @@ has a register assigned, but it wouldn't be the first register, that
 would be `&a`.
 
 ```c
-load_2("f")         //  4 NAME 'f'           vstack now [f r0 &a        ]
-load_3("g")         //  5 NAME 'g'           vstack now [g f r0 &a      ]
-mul_2()             //  6 MUL                vstack now [r1 r0 &a       ]
-add_1()             //  7 ADD                vstack now [r2 &a          ]
-load_2()            //  8 NAME 'd'           vstack now [d r2 &a        ]
-const_3(3)          //  9 CONST 3            vstack now [3 d r2 &a      ]
+load_2("f")         //  4 NAME 'f'
+                    //    vstack now [f r0 &a        ]
+load_3("g")         //  5 NAME 'g'
+                    //    vstack now [g f r0 &a      ]
+mul_2()             //  6 MUL
+                    //    vstack now [r1 r0 &a       ]
+add_1()             //  7 ADD
+                    //    vstack now [r2 &a          ]
+load_2()            //  8 NAME 'd'
+                    //    vstack now [d r2 &a        ]
+const_3(3)          //  9 CONST 3
+                    //    vstack now [3 d r2 &a      ]
 ```
 Slightly badly chosen example data, `const_3(3)` is **both** loading the
 constant "3" for computation, and also `_3` passing through 3 untouched
 registers (for "d", "r2", and "&a"). Finishing up:
 
 ```c
-add_2()             // 10 ADD                vstack now [r3 r2 &a       ]
-mul_1()             // 11 MUL                vstack now [r4 &a          ]
-assign_indirect_0() // 12 ASSIGN             vstack now [               ]
+add_2()             // 10 ADD
+                    //    vstack now [r3 r2 &a       ]
+mul_1()             // 11 MUL
+                    //    vstack now [r4 &a          ]
+assign_indirect_0() // 12 ASSIGN
+                    //    vstack now [               ]
 ```
 
 And we're done!
