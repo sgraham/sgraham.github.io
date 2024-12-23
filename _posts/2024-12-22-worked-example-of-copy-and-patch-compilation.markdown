@@ -252,8 +252,8 @@ this for our target expression `a = (b + c + f * g) * (d + 3)`:
      / \   / \
     b   c f   g
 ```
-and when flattened into an array representing a in post-order[^3] walk
-we have this:
+and when flattened into an array representing a post-order[^3] walk we
+have this:
 
 ```
 00: NAME (lval) 'a'
@@ -271,8 +271,8 @@ we have this:
 12: ASSIGN
 ```
 
-Then, the code to copy-and-patch using the snippets we generated looks
-like this:
+Then, the code to actually do the copy-and-patch compilation using the
+snippets we generated looks like this:
 
 ```c
 load_addr_0("a")    //  0 NAME (lval) 'a'    vstack now [&a             ]
@@ -311,6 +311,8 @@ mul_1()             // 11 MUL                vstack now [r4 &a          ]
 assign_indirect_0() // 12 ASSIGN             vstack now [               ]
 ```
 
+And we're done!
+
 ### Generated code
 
 Now that was a lot of futzing around, and you might be thinking "why
@@ -330,16 +332,19 @@ permute out versions that require stack spills. I'm a little unclear if
 I just don't understand when this would be required, or if it's no
 longer required because of improvements in clang's implementation of the
 `ghccc` calling convention. As far as I can tell, you can pass as many
-arguments as required. It will get less efficient if there's no
-registers left for temporaries because then clang will have to spill and
-restore, but as long as it keeps all, say, 30 arguments from the
-_input_ to the function, and gets them in the same order/location in the
-_invocation_ of the continuation, I don't see why we would have to do
-anything else. There was a mention of GHC only supporting 10 integer
-arguments which would mean only 10 live values, but as far as I can tell
-from testing, it seems to stash the rest of them relative to `rsp` and
-then shuffle as necessary in the body of the function. (Please let me
-know if you happen to more/better about this!)
+arguments as you want.
+
+It will get less efficient, of course, if there's no registers left for
+temporaries because then clang will have to spill and restore, but as
+long as it keeps all, say, 30 arguments from the _input_ to the
+function, and gets them in the same order/location in the _invocation_
+of the continuation, I don't see why we would have to do anything else.
+
+There were some mentions of `ghccc` only supporting 10 integer arguments
+which would mean only 10 live values on the virtual stack, but as far as
+I can tell from testing, it seems to stash the rest of them relative to
+`rsp` and then shuffle as necessary in the body of the function. (Please
+let me know if you happen to more/better about this!)
 
 Anyway, here's the full disassembly of the generated code from the
 example when run:
@@ -387,10 +392,12 @@ it sometime before 1980.
 ### Clear as mud
 
 That was a quite a lot of typing. But hey, maybe your C++/Rust build is
-finally done! I'm not sure if it actually communicates much to anyone
-other than me, but maybe stepping through the example code will be
-useful too if you're trying to figure it out (or get in touch, it's neat
-stuff to talk about!)
+finally done!
+
+I'm not sure if it actually communicated much to anyone other than me,
+but maybe stepping through the example code will be useful too if you're
+trying to figure it out how this works. Or get in touch, it's fun stuff
+to talk about!
 
 ---
 [^1]: It also doesn't work, so whether it's fast to compile is not overly important!
