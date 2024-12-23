@@ -92,33 +92,33 @@ we rip the code out of the object file, we instead replace them with the
 _actual values_ we want to add.
 
 This is a bit better, but the second trick makes it even better. Instead
-of performing an operation in normal function and returning the result,
-we change the stencils in two ways. The first is to change the calling
-convention to the
+of performing an operation in a normal function-type way and returning
+the result, we change the stencils in two ways. The first is to change
+the calling convention to the
 [GHC](https://llvm.org/docs/LangRef.html#calling-conventions) one. This
-very unusual calling convention has _no_ callee save registers. The second
-change is to make every function take a continuation and tail call (so
-it doesn't _need_ to save any registers).
+very unusual calling convention has _no_ callee save registers. The
+second change is to make every function take a continuation and tail
+call it (so it doesn't _need_ to save any registers).
 
-So what does that all mean? The add function would now look like:
+So what does that all mean? The "add" function would now look like:
 
 ```c
-extern uintptr_t $CONT;
+extern uintptr_t CONT;
 void GHCCC do_add(int a, int b) {
     int v = a + b;
-    [[musttail]] return ((void(*GHCCC)(void))&$CONT)(v);
+    [[musttail]] return ((void(*GHCCC)(void))&CONT)(v);
 }
 ```
 That is, it takes two arguments, and then instead of returning them,
 calls to a provided (patchable) address, putting the value in the first
-call slot.
+call parameter slot.
 
-Because of the calling convention of passing everything in registers, `a`
-and `b` will be whatever the first two are (happens to be `r13` and
-`rbp`), and then `v` will be in turn passed in `r13`. The cool part is
-that as long as the order is maintained when passing other arguments,
-there's no shuffling of registers, so the arguments to the function are
-effectively the "registers in use".
+Because of the calling convention of passing everything in registers,
+`a` and `b` will be whatever the first two are (happens to be `r13` and
+`rbp`), and then `v` will be in turn passed to the continuation in
+`r13`. The cool part is that as long as the order is maintained when
+passing other arguments, there's no shuffling of registers, so the
+arguments to the function are effectively the "registers in use".
 
 As long as the `[[musttail]]`-blah-blah has all the right calling
 convention goop, it will compile to a `jmp $+0` (where we're writing the
@@ -142,10 +142,10 @@ arguments in the continuation that you use. So if there were already two
 other values, you'd instead use:
 
 ```c
-extern uintptr_t $CONT;
+extern uintptr_t CONT;
 void GHCCC do_add_with_2(uintptr_t r0, uintptr_t r1, int a, int b) {
     int v = a + b;
-    [[musttail]] return ((void(*GHCCC)(uintptr_t, uintptr_t))&$CONT)(r0, r1, v);
+    [[musttail]] return ((void(*GHCCC)(uintptr_t, uintptr_t))&CONT)(r0, r1, v);
 }
 ```
 
@@ -167,16 +167,16 @@ Did you get all that? Me neither at first, so I hacked up a [standalone
 example](https://github.com/sgraham/copy-n-patch) of both the build time
 and the run time.
 
-The example is attempting to apply this technique to evaluating `a = (b
-+ c + f * g) * (d + 3)`. It does a (fake) tokenization, then a (fake)
+The example is attempting to apply this technique to evaluating `a = (b + c + f * g) * (d + 3)`.
+It does a (fake) tokenization, then a (fake)
 parse, and then pretends to walk the parse tree to generate code by
 calling stencil functions.
 
-The PochiVM code goes to great lengths to embed LLVM, build the AST
-using C++ metaprogramming, constexpr to burn things in, etc.
+The PochiVM paper code goes to great lengths to embed LLVM, build the
+AST using C++ metaprogramming, constexpr to burn things in, etc.
 
-I just did what I always do and usd Python to hack something together.
-`:p`. It templates some C code, patches the intermediate .ll files, then
+I just did what I always do and use Python to hack something together
+`:-p`. It templates some C code, patches the intermediate .ll files, then
 rips the code and reloctions out of the obj file to generate  _another_
 set of C functions. This second set of C functions are linked into the
 compiler you're actually writing, and are basically like `memcpy` with
@@ -224,6 +224,8 @@ snippets in C we use the (also uncommon, but has a keyword)
 `__vectorcall` calling convention. This gives us a nice simple/dumb
 keyword to replace in the LLVM IR with the annotations that specific
 `ghccc` before having clang generate the final target object file.
+Similarly, the `[[musttail]]` attribute can't be applied properly in the
+source C, so we do that in the `.ll` file too.
 
 ### Using the stencils
 
