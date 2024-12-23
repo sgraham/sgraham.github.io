@@ -393,7 +393,7 @@ yet, but I think it's probably similar to something like "finding the
 longest matching string" so I'm sure someone found the optimal way to do
 it sometime before 1980.
 
-### Clear as mud
+## Clear as mud
 
 That was a quite a lot of typing. But hey, maybe your C++/Rust build is
 finally done!
