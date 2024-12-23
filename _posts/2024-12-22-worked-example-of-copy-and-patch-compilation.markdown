@@ -17,7 +17,7 @@ Along the way [I had a
 vision](https://scot.tg/2024/12/20/60-fps-compiler/) that I'm sure is
 oft-repeated in various forms by other old people:
 
-"My Turbo Pascal projects [compiled in, like, a second](https://youtu.be/E6TxE8dQOIA?si=G8sRJv5lByNgSvzL&t=990)",
+> "My Turbo Pascal projects [compiled in, like, a second](https://youtu.be/E6TxE8dQOIA?si=G8sRJv5lByNgSvzL&t=990)",
 
 and were running on a computer (charitably, let's say a `486DX33`) that
 ran at 33MHz, whereas the computer I'm sitting at now runs at 3.8GHz.
