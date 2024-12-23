@@ -210,20 +210,27 @@ One subtle bit (x64-specific I guess, but other targets likely have
 similar restrictions) is that clang reasonably assumes that the
 addresses of all code and references are going to be with 2G of the
 instruction pointer (this is how all code is compiled by default). But
-because we're using the `extern uintptr_t` as arbitrary values to burn
+because we're using the `extern uintptr_t`s as arbitrary values to burn
 in, we might want an offset or value that's larger than 2^31 away. By
 using the `-mcmodel=medium` or `-mcmodel=large` we can tell clang that
 we don't want to make this assumption. That is, that it should allow a
-full 8 byte address when loading the value of the variable. By using
-this flag for some choice snippets (i.e. `uint64_t` const loading) the
-lack of range can be avoided without making all the code less efficient.
+full 8 byte address when loading the value of the variable. This causes
+it to use the more expensive sequence:
+```
+movabs rax, 0x0000000000000000
+mov rNN, rax
+```
+in those cases. But by using this flag only for some choice snippets
+(i.e. `uint64_t` const loading) the lack of range problem can be
+avoided, without making all the rest of the code less efficient.
 
 Another unfortunate subtlety is that you can't actually tell clang in C
-code to use the GHC calling convention. So instead when generating
+code to use the GHC calling convention. So instead, when generating
 snippets in C we use the (also uncommon, but has a keyword)
 `__vectorcall` calling convention. This gives us a nice simple/dumb
-keyword to replace in the LLVM IR with the annotations that specific
+keyword to replace in the LLVM IR with the annotations that specifies
 `ghccc` before having clang generate the final target object file.
+
 Similarly, the `[[musttail]]` attribute can't be applied properly in the
 source C, so we do that in the `.ll` file too.
 
