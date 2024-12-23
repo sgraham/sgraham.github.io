@@ -111,9 +111,9 @@ void __ghccc do_add(int a, int b) {
     [[musttail]] return ((void(*__ghccc)(void))&CONT)(v);
 }
 ```
-That is, it takes two arguments, and then instead of returning them,
-calls to a provided (patchable) address, putting the value in the first
-call parameter slot.
+That is, it takes two arguments, and then instead of returning the
+result, calls to a provided (patchable) address, putting the result in
+the first call parameter slot.
 
 Because of the calling convention of passing everything in registers,
 `a` and `b` will be whatever the first two are (happens to be `r13` and
@@ -380,16 +380,16 @@ tiny low-level operations, almost like bytecode, but there's nothing
 that restricts you to that.
 
 You could imagine in theory you could have a stencil that happens to
-calculate `(A+B + C*D) (E+3)` which almost fully matches our "program".
-In that case clang would have been run at `-O3` on the full structure of
-the program so it would be able apply whatever fancy optimizations it
-could to the whole expression. More reasonably though, it seems to make
-sense to have larger nodes that say, "check a conditional and run either
-a then or an else block", etc. which would match and handle a larger
-chunk of the parse tree.
+calculate `(A+B + C*D) * (E+3)` which almost fully matches our
+"program". In that case clang would have been run at `-O3` on the full
+structure of the program so it would be able apply whatever fancy
+optimizations it could to the whole expression. More reasonably though,
+it seems to make sense to have larger nodes that say, "check a
+conditional and run either a then block or an else block", etc. which
+would match and handle a larger chunk of the parse tree.
 
 I'm not quite sure how to set up and structure that pattern matching
-yet, but I think it's pretty similar to something like "finding the
+yet, but I think it's probably similar to something like "finding the
 longest matching string" so I'm sure someone found the optimal way to do
 it sometime before 1980.
 
@@ -398,10 +398,10 @@ it sometime before 1980.
 That was a quite a lot of typing. But hey, maybe your C++/Rust build is
 finally done!
 
-I'm not sure if it actually communicated much to anyone other than me,
-but maybe stepping through the example code will be useful too if you're
-trying to figure it out how this works. Or get in touch, it's fun stuff
-to talk about!
+I'm not sure if it actually communicated much to anyone other than me
+either, but maybe stepping through the example code will be useful too
+if you're trying to figure it out how this works. Or get in touch, it's
+fun stuff to talk about!
 
 ---
 [^1]: It also doesn't work, so whether it's fast to compile is not overly important!
