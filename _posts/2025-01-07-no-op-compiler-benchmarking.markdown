@@ -78,6 +78,10 @@ And just for the record (for comparison with `tcc` in a second) if you
 actually ask clang-19.1.0 to generate a `.o` file, it seems to take about **5x
 longer** at ~2 minutes.
 
+Also notable, [a while back I measured something more (?)
+realistic](/2023/04/11/fast-updates/) and msvc was quite a bit faster,
+so maybe the only data here is that this benchmark is dumb. Onwards!
+
 ### tcc
 
 I had previously switched a C-outputting project to compile with TinyCC
