@@ -202,3 +202,7 @@ silly, so I'm done for now.
 Next time, I'll write about the rathole I went down trying to set myself
 up to beat these times, and we can all learn how much I don't know about
 SIMD!
+
+### Addendum
+
+Added Rust the next day: `436s` (7 minutes 16 seconds!)
